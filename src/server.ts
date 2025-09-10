@@ -61,8 +61,6 @@ export class OnyxMcpServer {
   private setupToolHandlers() {
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
       switch (request.params.name) {
-        case 'search_onyx':
-          return handleSearchOnyx(request.params.arguments, this.onyxApiService);
         case 'chat_with_onyx':
           return handleChatWithOnyx(request.params.arguments, this.onyxApiService);
         default:
