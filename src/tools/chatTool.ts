@@ -22,8 +22,7 @@ export async function handleChatWithOnyx(args: unknown, onyxApiService: OnyxApiS
 
     const { 
       query, 
-      personaId = DEFAULT_PERSONA_ID, 
-      documentSets = [],
+      personaId = DEFAULT_PERSONA_ID,
       // Unused parameter removed: enableAutoDetectFilters
       chatSessionId = null 
     } = args as ChatParams;
@@ -43,7 +42,7 @@ export async function handleChatWithOnyx(args: unknown, onyxApiService: OnyxApiS
     }
 
     // Step 2: Send a message to the chat session
-    const { answer, documents } = await onyxApiService.sendChatMessage(sessionId, query, documentSets);
+    const { answer, documents } = await onyxApiService.sendChatMessage(sessionId, query);
 
     return {
       content: [

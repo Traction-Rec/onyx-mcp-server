@@ -186,32 +186,16 @@ export class OnyxApiService {
    * Send a message to a chat session
    * @param sessionId The chat session ID
    * @param query The message to send
-   * @param documentSets Optional document sets to search within
    * @returns The chat response
    */
-  async sendChatMessage(sessionId: string, query: string, documentSets: string[] = []): Promise<{ answer: string, documents: OnyxDocument[] }> {
-    const sendMessageUrl = `${this.config.apiUrl}/chat/send-message`;
+  async sendChatMessage(sessionId: string, query: string): Promise<{ answer: string, documents: OnyxDocument[] }> {
+    const sendMessageUrl = `${this.config.apiUrl}/chat/send-message-simple-api`;
     console.error(`Sending message to: ${sendMessageUrl}`);
     console.error(`With chat_session_id: ${sessionId}`);
     
     const messagePayload = {
       chat_session_id: sessionId,
-      parent_message_id: null,
-      message: query,
-      search_doc_ids: [],
-      file_descriptors: [],
-      prompt_id: null,
-      retrieval_options: {
-        run_search: 'auto',
-        real_time: true,
-        filters: {
-          document_set: documentSets.length > 0 ? documentSets : null,
-          source_type: null,
-          time_cutoff: null,
-          tags: null
-        }
-      },
-      regenerate: false
+      message: query
     };
     
     if (DEBUG) {
